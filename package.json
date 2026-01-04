@@ -1,0 +1,15 @@
+{
+    "name": "openai-tools",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "vite"
+    },
+    "dependencies": {
+        "openai": "latest",
+        "vue": "latest"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "latest",
+        "vite": "latest"
+    }
+}

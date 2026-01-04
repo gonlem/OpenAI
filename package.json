@@ -6,7 +6,8 @@
     },
     "dependencies": {
         "openai": "latest",
-        "vue": "latest"
+        "vue": "latest",
+        "vue-router": "latest"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "latest",

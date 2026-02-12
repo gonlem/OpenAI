@@ -72,7 +72,7 @@ function getEstimatedCost(inputTokens, outputTokens) {
         <div class="flex-column">
             <label>
                 <span>Request</span>
-                <textarea v-model="ai_request"></textarea>
+                <textarea name="request" v-model="ai_request"></textarea>
             </label>
         </div>
         <div class="flex-column fit-content">
@@ -114,7 +114,7 @@ function getEstimatedCost(inputTokens, outputTokens) {
         <div class="flex-column">
             <label>
                 <span>Response</span>
-                <textarea>{{ ai_response }}</textarea>
+                <textarea name="response">{{ ai_response }}</textarea>
             </label>
             <label v-if="ai_response_image">
                 <span>Generated Image</span>
@@ -124,7 +124,7 @@ function getEstimatedCost(inputTokens, outputTokens) {
     </div>
 </template>
 
-<style>
+<style scoped>
 @import "../assets/base.css";
 
 #app {

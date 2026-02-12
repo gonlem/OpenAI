@@ -13,6 +13,7 @@ const ai_reasoning_effort = Vue.ref('low'); // "none" | "minimal" | "low" | "med
 const ai_service_tier = Vue.ref('default'); // "flex" | "default" | "priority" | "auto"
 const ai_temperature = Vue.ref(1.0);
 const ai_web_search = Vue.ref('no'); // "yes" | "no"
+const ai_store = Vue.ref('yes'); // "yes" | "no"
 
 async function callResponsesApi() {
     try {
@@ -23,7 +24,7 @@ async function callResponsesApi() {
             reasoning: { effort: ai_reasoning_effort.value },
             input: ai_request.value,
             service_tier: ai_service_tier.value,
-            store: true,
+            store: ai_store.value === 'yes',
             temperature: parseFloat(ai_temperature.value),
             tools: ai_web_search.value === 'yes' ? [{ type: 'web_search' }] : [],
         });
@@ -75,7 +76,7 @@ function getEstimatedCost(inputTokens, outputTokens) {
         <div class="flex-column">
             <label>
                 <span>Request</span>
-                <textarea v-model="ai_request"></textarea>
+                <textarea name="request" v-model="ai_request"></textarea>
             </label>
         </div>
         <div class="flex-column fit-content">
@@ -110,11 +111,18 @@ function getEstimatedCost(inputTokens, outputTokens) {
             </label>
             <label>
                 <span>Temperature</span>
-                <input type="number" min="0" max="2" step="0.1" v-model="ai_temperature" />
+                <input name="temperature" type="number" min="0" max="2" step="0.1" v-model="ai_temperature" />
             </label>
             <label>
                 <span>Web Search</span>
-                <select name="type" v-model="ai_web_search" required>
+                <select name="web_search" v-model="ai_web_search" required>
+                    <option>yes</option>
+                    <option>no</option>
+                </select>
+            </label>
+            <label>
+                <span>Store</span>
+                <select name="store" v-model="ai_store" required>
                     <option>yes</option>
                     <option>no</option>
                 </select>
@@ -124,13 +132,13 @@ function getEstimatedCost(inputTokens, outputTokens) {
         <div class="flex-column">
             <label>
                 <span>Response</span>
-                <textarea>{{ ai_response }}</textarea>
+                <textarea name="response">{{ ai_response }}</textarea>
             </label>
         </div>
     </div>
 </template>
 
-<style>
+<style scoped>
 @import "../assets/base.css";
 
 textarea {
